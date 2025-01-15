@@ -1,30 +1,39 @@
-import {db, auth} from '../../firebase/firebaseConfig';
-import { doc, setDoc, getDoc} from 'firebase/firestore';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
+import {db  } from './firebaseConfig.js';
+import { setDoc } from "https://www.gstatic.com/firebasejs/9.1.3/firebase-firestore.js";
+import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.1.3/firebase-auth.js";
 
 
 //singup functions
 async function signup_user(username, email, password, fullName){
     try{
-        const userRef = doc(db, 'users', username);
-        const userSnap = await getDoc(userRef);
+        // Check if the username is already taken
+        const usernameRef = doc(db, 'usernames', username);
+        const usernameSnap = await getDoc(usernameRef);
 
-        if(userSnap.exists()){
+        if (usernameSnap.exists()) {
             console.error('Username already taken');
+            throw new Error('Username already taken');
         }
 
-        //if username isnt taken create a new user profile
-        const userCredentials = await createUserWithEmailAndPassword(auth, email, password);
-
-        await setDoc(userRef, {
+        const auth = getAuth();
+        // Create user with Firebase Authentication
+        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+        const user = userCredential.user;
+        // Store additional user data in Firestore
+        await setDoc(doc(db, 'users', user.uid), {
+            username: username,
             email: email,
-            password: password,
             fullName: fullName,
-            sets: [] //give user empty array of sets when registering
+            ownedSets: [], // Give user empty array of sets when registering
+            wishlistSets: []
         });
-        console.log('User created succesfully: ', username)
-    } catch{
-        console.error('Unable to create user: ', error.message)
+        // Store username mapping for uniqueness check
+        await setDoc(usernameRef, { uid: user.uid });
+        console.log('User created succesfully: ', docRef);
+
+    } catch(error){
+        console.error('Unable to create user: ', error);
+        throw error;
     }
 }
 
