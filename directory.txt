@@ -16,9 +16,11 @@ brick_by_brick
 |       |-login.js
 |       |-register.js
 |       |-signup_helper.js
+|templates/
 |   |-index.html
 |   |login.html
 |   |register.html
+|run.py
 
 
 

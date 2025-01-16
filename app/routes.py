@@ -1,13 +1,14 @@
-from flask import Flask, request, jsonify, render_template
+from flask import request, jsonify, render_template
 from .utils import get_set_by_params, authenticate
 import json
+from app import app
 
 
-app = Flask(__name__)
+
 
 @app.route('/')
 def index():
-    return render_template('index.html')\
+    return render_template('index.html')
     
 @app.route('/login')
 def login():
