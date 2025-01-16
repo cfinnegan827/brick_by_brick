@@ -5,17 +5,14 @@ brick_by_brick
 |   |-__init__.py
 |   |-config.py (holds the brickset api key and login info)
 |   |-cookies.py (used to configure cookies for the site)
-|   |-models.py
-|   |-routes.py (routes that will be called to get data ex. the lego sets based on a query and/or given params)
+|   |config/
+|   |   |-service_key.json
+|   |   |-firebaseConfig.py
+|   |-routes.py (routes that will be called to get data ex. the lego sets based on a query and/or given params also has any firebase functions)
 |   |-utils.py  (utility helper functions to get userhash and other smaller helper function)
-|
-|static/
-|   |-js/
-|       |-firebaseConfig.js
-|       |-login_helper.js
-|       |-login.js
-|       |-register.js
-|       |-signup_helper.js
+|Static/
+|   |-login.js (gets the data from the login form and calls the backend route to login)
+|   |-register.js (gets the data from the signup form and calls the backend route for creating a user in firestore)
 |templates/
 |   |-index.html
 |   |login.html
