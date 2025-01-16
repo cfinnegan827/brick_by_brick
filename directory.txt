@@ -3,13 +3,13 @@ brick_by_brick
 |.venv
 |app/
 |   |-__init__.py
-|   |-config.py
-|   |-cookies.py
+|   |-config.py (holds the brickset api key and login info)
+|   |-cookies.py (used to configure cookies for the site)
 |   |-models.py
-|   |-routes.py
-|   |-utils.py
+|   |-routes.py (routes that will be called to get data ex. the lego sets based on a query and/or given params)
+|   |-utils.py  (utility helper functions to get userhash and other smaller helper function)
 |
-|public/
+|static/
 |   |-js/
 |       |-firebaseConfig.js
 |       |-login_helper.js

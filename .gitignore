@@ -1,3 +1,4 @@
 .venv
 app/config.py
 public/js/firebaseConfig.js
+app/__pycache__

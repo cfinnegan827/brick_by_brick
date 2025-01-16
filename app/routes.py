@@ -1,10 +1,21 @@
-from flask import Flask, request, jsonify
-from utils import get_set_by_params, authenticate
+from flask import Flask, request, jsonify, render_template
+from .utils import get_set_by_params, authenticate
 import json
 
 
 app = Flask(__name__)
 
+@app.route('/')
+def index():
+    return render_template('index.html')\
+    
+@app.route('/login')
+def login():
+    return render_template('login.html')
+
+@app.route('/register')
+def register():
+    return render_template('register.html')
 
 #get all sets based on a set of params using get_set_by_params function
 @app.route('/get-sets', methods=['POST'])
