@@ -1,0 +1,24 @@
+brick_by_brick
+|
+|.venv
+|app/
+|   |-__init__.py
+|   |-config.py
+|   |-cookies.py
+|   |-models.py
+|   |-routes.py
+|   |-utils.py
+|
+|public/
+|   |-js/
+|       |-firebaseConfig.js
+|       |-login_helper.js
+|       |-login.js
+|       |-register.js
+|       |-signup_helper.js
+|   |-index.html
+|   |login.html
+|   |register.html
+
+
+

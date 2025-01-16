@@ -4,15 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script type="module" src="./js/login.js"></script>
+    <script type="module" src="./js/firebaseConfig.js"></script> 
 </head>
 <body>
     <h1>Login</h1>
-    <form action="/frontend/user_creds/login.php" method="post">
+    <form id="login-form" method="post">
         <label for="username">Username</label><br>
-        <input type="text" id="username" name="username"><br>
+        <input type="text" id="username" name="username" autocomplete="off" required><br>
         <label for="password">Password</label><br>
-        <input type="text" id="password" name="password"><br>
+        <input type="password" id="password" name="password" autocomplete="off" required><br>
         <input type="submit" value="Submit">
     </form>
+    <div id="message"></div>
 </body>
 </html>
