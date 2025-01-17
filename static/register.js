@@ -1,6 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('signup-form');
-    const messageDiv = document.getElementById('message');
 
     form.addEventListener('submit', async (e) => {
         e.preventDefault();

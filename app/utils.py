@@ -2,6 +2,7 @@ import requests
 from app.config.brickset_config import BRICKSET_API_KEY, BRICKSET_USERNAME, BRICKSET_PASSWORD
 from app.config.firebaseConfig import db
 import json
+import bcrypt
 
 API_URL = "https://brickset.com/api/v3.asmx"
 
@@ -62,8 +63,10 @@ def add_user_to_db(data):
             raise ValueError("Username is required to add user")
         
         username = data['username']
+        password = bcrypt.hashpw(data['password'].encode('utf-8'), bcrypt.gensalt())
         db.collection("users").document(username).set({
             "username": username,
+            "password": password.decode('utf-8'),
             "name": data["fullName"],
             "email": data["email"],
             "ownedSets": [],
@@ -72,3 +75,26 @@ def add_user_to_db(data):
         return f"User created succesfully: {username}"
     except Exception as e:
         raise Exception(f"Error adding user to Firestore: {str(e)}")
+    
+#authenticates a user by username and password
+def authenticate_user(data):
+    """
+    takes a users username and password and authenticates them, if authentication
+    passes user can log in succesfully
+    """
+    username = data['username']
+    password = data['password'].encode('utf-8')
+    try:
+        userRef = db.collection('users').document(username)
+        user = userRef.get()
+
+        if not user.exists:
+            raise ValueError(f"User {username} not found")
+        
+        stored_password = user.to_dict()['password'].encode('utf-8')
+
+        if bcrypt.checkpw(password, stored_password):
+            return True
+    except Exception as e:
+        return f"Error verifying password: {str(e)}"
+    

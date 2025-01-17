@@ -11,8 +11,6 @@ document.addEventListener('DOMContentLoaded', () => {
         // Get form values
         const username = document.getElementById('username').value.trim();
         const password = document.getElementById('password').value.trim();
-        console.log(username);
-
         try {
             // Call the signup function
             await login_user(username, password);
