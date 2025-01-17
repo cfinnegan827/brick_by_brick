@@ -1,15 +1,25 @@
-from flask import request, jsonify, render_template, redirect, url_for
+from flask import request, jsonify, render_template, redirect, url_for, session
 from .utils import *
 import json
 from app import app
 
 
+app.secret_key = 'your_secret_key_here'
 
 
-@app.route('/home')
+@app.route('/')
 def index():
-    return render_template('index.html')
+    if 'username' in session:
+        return render_template(url_for('home'))
+    return render_template('login.html')
     
+@app.route('/home')
+def home():
+    if 'username' in session:
+        username = session['username']
+        return render_template('home.html', username = username)
+    return render_template(url_for('/index'))
+
 @app.route('/login')
 def login():
     return render_template('login.html')
@@ -18,12 +28,24 @@ def login():
 def register():
     return render_template('register.html')
 
+@app.route('/logout')
+def logout():
+    # Clear the session when logging out
+    session.pop('username', None)
+    session.pop('ownedSets', None)
+    session.pop('wishlistSets', None)
+    return redirect(url_for('index'))  # Redirect to login page
+
 @app.route('/authenticate-user', methods=['POST'])
 def authenticate_user():
     try:
         username = request.form['username']
         password = request.form['password']
         if authenticate_user_in_db(username, password):
+            ownedSets, wishlistSets = get_users_set_lists(username)
+            session['username'] = username
+            session['ownedSets'] = ownedSets
+            session['wishlistSets'] = wishlistSets
             return redirect(url_for('index')) #fix this to add cookies using session nect time.
         return False
     except Exception as e:

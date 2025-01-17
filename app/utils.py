@@ -95,3 +95,10 @@ def authenticate_user_in_db(username, password):
     except Exception as e:
         return f"Error verifying password: {str(e)}"
     
+#given a username gets both set list of  a user for cookies
+def get_users_set_lists(username):
+    userRef = db.collection('users').document(username)
+    user = userRef.get().to_dict()
+    ownedSets = user['ownedSets']
+    wishlist = user['wishlistSets']
+    return ownedSets, wishlist
