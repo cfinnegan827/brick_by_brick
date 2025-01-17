@@ -18,6 +18,17 @@ def login():
 def register():
     return render_template('register.html')
 
+@app.route('/authenticate-user', methods=['POST'])
+def authenticate_user():
+    try:
+        username = request.form['username']
+        password = request.form['password']
+        if authenticate_user_in_db(username, password):
+            return redirect(url_for('index')) #fix this to add cookies using session nect time.
+        return False
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
 @app.route('/add-user', methods=['POST'])
 def add_user():
     try:
@@ -25,8 +36,8 @@ def add_user():
         password = request.form['password']
         email = request.form['email']
         fullName = request.form['fullName']
-        add_user_to_db(username,password,email,fullName)
-        return redirect(url_for('index'))
+        if add_user_to_db(username,password,email,fullName):
+            return redirect(url_for('login'))
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 

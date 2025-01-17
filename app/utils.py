@@ -69,18 +69,18 @@ def add_user_to_db(username,password,email,fullName):
             "ownedSets": [],
             "wishlistSets": []
         })
-        return f"User created succesfully: {username}"
+        return True
     except Exception as e:
         raise Exception(f"Error adding user to Firestore: {str(e)}")
     
 #authenticates a user by username and password
-def authenticate_user(data):
+def authenticate_user_in_db(username, password):
     """
     takes a users username and password and authenticates them, if authentication
     passes user can log in succesfully
     """
-    username = data['username']
-    password = data['password'].encode('utf-8')
+    username = username
+    password = password.encode('utf-8')
     try:
         userRef = db.collection('users').document(username)
         user = userRef.get()
