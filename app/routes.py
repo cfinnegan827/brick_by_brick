@@ -1,12 +1,12 @@
-from flask import request, jsonify, render_template
-import utils as util
+from flask import request, jsonify, render_template, redirect, url_for
+from .utils import *
 import json
 from app import app
 
 
 
 
-@app.route('/')
+@app.route('/home')
 def index():
     return render_template('index.html')
     
@@ -21,11 +21,12 @@ def register():
 @app.route('/add-user', methods=['POST'])
 def add_user():
     try:
-        data = request.json
-        if not data:
-            return jsonify({"error": "not data provided"}), 400
-        message = util.add_user_to_db(data)
-        return jsonify({"message": message}), 201
+        username = request.form['username']
+        password = request.form['password']
+        email = request.form['email']
+        fullName = request.form['fullName']
+        add_user_to_db(username,password,email,fullName)
+        return redirect(url_for('index'))
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
@@ -35,12 +36,12 @@ def get_sets():
     input_data = request.json
     if not input_data:
         return jsonify({"error": "Invalid input, expected JSON"}), 400
-    user_hash = util.authenticate()
+    user_hash = authenticate()
     if not user_hash:
         return jsonify({"error": "invalid user hash data authentication failed"}), 401
     try:
         params = input_data.get('params', {})
-        sets = util.get_set_by_params(user_hash, params)
+        sets = get_set_by_params(user_hash, params)
         return jsonify({"success": True, "sets": sets})
     except Exception as e:
         return jsonify({"error": str(e)}), 500

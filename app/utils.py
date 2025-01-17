@@ -54,21 +54,18 @@ def get_set_by_params(user_hash, params):
 
 
 #adds a user to the firebase database
-def add_user_to_db(data):
+def add_user_to_db(username,password,email,fullName):
     """
     Adds a user to Firestore with the username as the document ID.
     """
     try:
-        if "username" not in data or not data["username"]:
-            raise ValueError("Username is required to add user")
-        
-        username = data['username']
-        password = bcrypt.hashpw(data['password'].encode('utf-8'), bcrypt.gensalt())
+        username = username
+        hash_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
         db.collection("users").document(username).set({
             "username": username,
-            "password": password.decode('utf-8'),
-            "name": data["fullName"],
-            "email": data["email"],
+            "password": hash_password.decode('utf-8'),
+            "name": fullName,
+            "email": email,
             "ownedSets": [],
             "wishlistSets": []
         })
