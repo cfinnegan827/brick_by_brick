@@ -10,7 +10,7 @@ app.secret_key = 'your_secret_key_here'
 @app.route('/')
 def index():
     if 'username' in session:
-        return render_template(url_for('home'))
+        return redirect(url_for('home'))
     return render_template('login.html')
     
 @app.route('/home')
@@ -18,7 +18,7 @@ def home():
     if 'username' in session:
         username = session['username']
         return render_template('home.html', username = username)
-    return render_template(url_for('/index'))
+    return redirect(url_for('index'))
 
 @app.route('/login')
 def login():
@@ -38,16 +38,16 @@ def logout():
 
 @app.route('/authenticate-user', methods=['POST'])
 def authenticate_user():
+    username = request.form['username']
+    password = request.form['password']
     try:
-        username = request.form['username']
-        password = request.form['password']
         if authenticate_user_in_db(username, password):
             ownedSets, wishlistSets = get_users_set_lists(username)
             session['username'] = username
             session['ownedSets'] = ownedSets
             session['wishlistSets'] = wishlistSets
-            return redirect(url_for('index')) #fix this to add cookies using session nect time.
-        return False
+            return redirect(url_for('home')) #fix this to add cookies using session nect time.
+        return redirect(url_for('index'))
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
