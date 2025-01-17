@@ -1,5 +1,5 @@
 import requests
-from app.config import BRICKSET_API_KEY, BRICKSET_USERNAME, BRICKSET_PASSWORD
+from app.config.brickset_config import BRICKSET_API_KEY, BRICKSET_USERNAME, BRICKSET_PASSWORD
 import json
 
 API_URL = "https://brickset.com/api/v3.asmx"

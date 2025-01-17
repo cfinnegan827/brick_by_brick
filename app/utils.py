@@ -1,5 +1,6 @@
 import requests
-from app.config import BRICKSET_API_KEY, BRICKSET_USERNAME, BRICKSET_PASSWORD
+from app.config.brickset_config import BRICKSET_API_KEY, BRICKSET_USERNAME, BRICKSET_PASSWORD
+from app.config.firebaseConfig import db
 import json
 
 API_URL = "https://brickset.com/api/v3.asmx"
@@ -49,3 +50,25 @@ def get_set_by_params(user_hash, params):
             print("No sets found.")
     else:
         print(f"Error: {response.status_code}")
+
+
+#adds a user to the firebase database
+def add_user_to_db(data):
+    """
+    Adds a user to Firestore with the username as the document ID.
+    """
+    try:
+        if "username" not in data or not data["username"]:
+            raise ValueError("Username is required to add user")
+        
+        username = data['username']
+        db.collection("users").document(username).set({
+            "username": username,
+            "name": data["fullName"],
+            "email": data["email"],
+            "ownedSets": [],
+            "wishlistSets": []
+        })
+        return f"User created succesfully: {username}"
+    except Exception as e:
+        raise Exception(f"Error adding user to Firestore: {str(e)}")

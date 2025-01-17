@@ -1,5 +1,5 @@
 from flask import request, jsonify, render_template
-from .utils import get_set_by_params, authenticate
+from .utils import get_set_by_params, authenticate, add_user_to_db
 import json
 from app import app
 
@@ -17,6 +17,17 @@ def login():
 @app.route('/register')
 def register():
     return render_template('register.html')
+
+@app.route('add-user', methods=['POST'])
+def add_user():
+    try:
+        data = request.json
+        if not data:
+            return jsonify({"error": "not data provided"}), 400
+        message = add_user_to_db(data)
+        return jsonify({"message": message}), 201
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
 #get all sets based on a set of params using get_set_by_params function
 @app.route('/get-sets', methods=['POST'])
