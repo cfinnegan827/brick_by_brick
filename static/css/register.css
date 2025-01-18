@@ -1,0 +1,89 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #121212;
+    color: #e8e8e8;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+}
+
+h1 {
+    margin-bottom: 20px;
+}
+
+/* Styling for the form */
+form {
+    background: #212121;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    width: 300px;
+}
+
+/* Input field styling */
+.inputBox {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.inputBox input {
+    width: 100%;
+    padding: 15px 20px;
+    outline: none;
+    background: transparent;
+    border-radius: 5px;
+    color: #e8e8e8;
+    border: 1px solid #e8e8e8;
+    font-size: 1em;
+    transition: border-color 0.3s;
+    box-sizing: border-box;
+}
+
+.inputBox input:focus {
+    border-color: #00bcd4;
+}
+
+.inputBox span {
+    position: absolute;
+    top: -10px;
+    left: 10px;
+    font-size: 0.7em;
+    transform: translateY(0);
+    padding: 0 6px 1px 5px;
+    border-radius: 2px;
+    background: #212121;
+    letter-spacing: 1px;
+    border: 1px solid #e8e8e8;
+    color: #e8e8e8;
+    pointer-events: none;
+    transition: color 0.3s, border-color 0.3s;
+}
+
+/* Submit button */
+input[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #b5b6b6;
+    color: #121212;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+input[type="submit"]:hover {
+    background-color: #0196a7;
+}
+
+a {
+    display: block; /* Makes it easier to tap on mobile */
+    text-align: center;
+    margin-top: 10px;
+    color: #00bcd4;
+    text-decoration: none;
+    font-size: 0.9em;
+}

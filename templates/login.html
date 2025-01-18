@@ -4,15 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
 </head>
 <body>
     <h1>Login</h1>
     <form id="login-form" action="{{ url_for('authenticate_user') }}"method="post">
-        <label for="username">Username</label><br>
-        <input type="text" id="username" name="username" autocomplete="off" required><br>
-        <label for="password">Password</label><br>
-        <input type="password" id="password" name="password" autocomplete="off" required><br>
-        <input type="submit" value="Submit">
+        <div class="inputBox">
+            <input type="text" id="username" name="username" autocomplete="off" required><br>
+            <span for="username">Username</span><br>
+        </div>
+        <div class="inputBox">
+            <input type="password" id="password" name="password" autocomplete="off" required><br>
+            <span for="password">Password</span><br>
+        </div>
+        <input type="submit" value="Submit"><br>
+
+        <a href="{{url_for('register')}}">Don't have and account? Sign Up</a>
     </form>
     <div id="message"></div>
 </body>

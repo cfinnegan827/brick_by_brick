@@ -4,23 +4,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign Up</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/register.css') }}">
+</head>
 </head>
 <body>
     <h1>Sign Up</h1>
     <form id="signup-form" action="{{ url_for('add_user') }}" method="post">
-        <label for="username">Username</label><br>
-        <input type="text" id="username" name="username" autocomplete="off" required><br>
+        <div class="inputBox">
+            <span for="username">Username</span><br>
+            <input type="text" id="username" name="username" autocomplete="off" required><br>
+        </div>
 
-        <label for="fullName">Full Name</label><br>
-        <input type="text" id="fullName" name="fullName" autocomplete="off" required><br>
+        <div class="inputBox">
+            <span for="fullName">Full Name</span><br>
+            <input type="text" id="fullName" name="fullName" autocomplete="off" required><br>
+        </div>
 
-        <label for="email">Email</label><br>
-        <input type="email" id="email" name="email" autocomplete="off" required><br>
+        <div class="inputBox">
+            <span for="email">Email</span><br>
+            <input type="email" id="email" name="email" autocomplete="off" required><br>
+        </div>
 
-        <label for="password">Password</label><br>
-        <input type="password" id="password" name="password" autocomplete="off" required><br>
-        
-        <input type="submit" value="Sign Up">
+        <div class="inputBox">
+            <span for="password">Password</span><br>
+            <input type="password" id="password" name="password" autocomplete="off" required><br>
+        </div>
+        <input type="submit" value="Sign Up"><br>
+
+        <a href="{{url_for('login')}}">Already have an account? Login</a>
     </form>
     <div id="message"></div>
 </body>
