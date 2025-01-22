@@ -4,13 +4,54 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
 </head>
 <body>
-    <header>
-        <p>Welcome, {{ username }}!</p>
-        <a href="/logout">Logout</a>
+    <header class="header">
+        <div class="header-item">Section 1</div>
+        <div class="header-item">Section 2</div>
+        <div class="header-item">Section 3</div>
     </header>
-    <h1>Welcome to the Home Page</h1>
-    <p>This is a protected page. You are logged in.</p>
+    <div class="carousel-container">
+        <div class="carousel">
+            <div class="carousel-item" style="transform: rotateY(0deg) translateZ(400px);">
+                <img src="https://images.brickset.com/sets/images/10342-1.jpg" alt="Pretty Pink Flower Bouquet">
+                <div class="popup-card">
+                    <h3>Pretty Pink Flower Bouquet</h3>
+                    <p>This set has 749 pieces.</p>
+                </div>
+            </div>
+            <div class="carousel-item" style="transform: rotateY(72deg) translateZ(400px);">
+                <img src="https://images.brickset.com/sets/images/10343-1.jpg" alt="Mini Orchid">
+                <div class="popup-card">
+                    <h3>Mini Orchid</h3>
+                    <p>This set has 274 pieces.</p>
+                </div>
+            </div>
+            <div class="carousel-item" style="transform: rotateY(144deg) translateZ(400px);">
+                <img src="https://images.brickset.com/sets/images/10344-1.jpg" alt="Lucky Bamboo">
+                <div class="popup-card">
+                    <h3>Lucky Bamboo</h3>
+                    <p>This set has 325 pieces.</p>
+                </div>
+            </div>
+            <div class="carousel-item" style="transform: rotateY(216deg) translateZ(400px);">
+                <img src="https://images.brickset.com/sets/images/10345-1.jpg" alt="Flower Arrangement">
+                <div class="popup-card">
+                    <h3>Flower Arrangement</h3>
+                    <p>This set is the largest of the botanicals with 1161 pieces.</p>
+                </div>
+            </div>
+            <div class="carousel-item" style="transform: rotateY(288deg) translateZ(400px);">
+                <img src="https://images.brickset.com/sets/images/30701-1.jpg" alt="Field Flowers">
+                <div class="popup-card">
+                    <h3>Field Flowers</h3>
+                    <p>This set is the smallest botanical with 77 pieces.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+      
+    <a href="/logout">Logout</a>
 </body>
 </html>

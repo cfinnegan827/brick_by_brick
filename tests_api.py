@@ -42,7 +42,7 @@ def get_set_by_params(user_hash, params):
                 print(f"Set ID: {set_info['setID']}")
                 print(f"Year: {set_info['year']}")
                 print(f"Pieces: {set_info.get('pieces', 'N/A')}")
-                print(f"Set Image: {set_info['image']['imageURL']}\n")
+                print(f"Set Image: {set_info['image'], 'N/A'}\n")
             return data['sets']
         else:
             print(data)
@@ -74,7 +74,7 @@ def get_sets( page_size, page_number, query, user_hash):
                     print(f"Year: {lego_set['year']}")
                     print(f"Pieces: {lego_set.get('pieces', 'N/A')}")
                     print(f"Minifigs: {lego_set.get('minifigs', 'N/A')}")
-                    print(f"Set Image: {lego_set['image']['imageURL']}\n")
+                    print(f"Set Image: {lego_set['image']['imageURL'], 'N/A'}\n")
             else:
                 print("No sets found.")
         except ValueError:

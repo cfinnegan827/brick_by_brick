@@ -45,7 +45,7 @@ def get_set_by_params(user_hash, params):
                 print(f"Set ID: {set_info['setID']}")
                 print(f"Year: {set_info['year']}")
                 print(f"Pieces: {set_info.get('pieces', 'N/A')}")
-                print(f"Set Image: {set_info['image']['imageURL']}\n")
+                print(f"Set Image: {set_info['image']['imageURL'], 'N/A'}\n")
             return data["sets"]
         else:
             print("No sets found.")
