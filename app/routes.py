@@ -44,6 +44,10 @@ def login():
 def register():
     return render_template('register.html')
 
+@app.route('/owned-sets')
+def owned_sets():
+    return render_template('/sets/ownedSets.html')
+
 @app.route('/logout')
 def logout():
     # Clear the session when logging out
