@@ -1,13 +1,14 @@
 body{
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(7, 1fr);
     grid-template-rows: repeat(5, 1fr);
     grid-column-gap: 0px;
     grid-row-gap: 0px; 
 }
+
 .header {
     display: flex; /* Makes the divs align horizontally */
-    grid-area: 1 / 1 / 2 / 6;
+    grid-area: 1 / 1 / 2 / 8;
     height: 50%;
     justify-content: space-between; /* Distributes space between divs */
     align-items: center; /* Aligns items vertically in the center */
@@ -18,7 +19,6 @@ body{
     box-sizing: border-box; /* Includes padding in the width calculation */
 }
 
-/* Individual header items */
 .header-item {
     font-size: 18px; /* Text size */
     color: #333; /* Text color */
@@ -38,5 +38,25 @@ body{
     color: inherit;        /* Inherit color from parent */
 }
 
+.set-container{
+    display: grid;
+    background-color: brown;
+    grid-area: 2 / 1 / 5 / 9;
+    grid-template-rows: repeat(5, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    grid-column-gap: 0px;
+    grid-row-gap: 0px; 
+    padding-left: 5vw;
+    padding-right: 5vw;
+}
+.ownedSets{
+    height: 40vh;
+    background-color: red;
+    grid-area: 2 / 1 / 5 / 3;
+}
 
-
+.wishlistSets{
+    height: 40vh;
+    background-color: blueviolet;
+    grid-area: 2 / 4 / 5 / 6;
+}

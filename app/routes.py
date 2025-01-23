@@ -1,10 +1,12 @@
 from flask import request, jsonify, render_template, redirect, url_for, session
 from .utils import *
+from datetime import timedelta
 import json
 from app import app
 
 
 app.secret_key = 'your_secret_key_here'
+app.permanent_session_lifetime = timedelta(hours=5)
 
 
 @app.route('/')
@@ -12,7 +14,21 @@ def index():
     if 'username' in session:
         return redirect(url_for('home'))
     return render_template('login.html')
-    
+
+@app.route('/profile-page')
+def profile_page():
+    if 'username' in session:
+        username = session['username']
+        return render_template('profile.html', username = username)
+    return redirect(url_for('index'))
+
+@app.route('/settings')
+def settings_page():
+    if 'username' in session:
+        username = session['username']
+        return render_template('settings.html', username = username)
+    return redirect(url_for('index'))
+
 @app.route('/home')
 def home():
     if 'username' in session:
@@ -43,6 +59,7 @@ def authenticate_user():
     try:
         if authenticate_user_in_db(username, password):
             ownedSets, wishlistSets = get_users_set_lists(username)
+            session.permanent = True
             session['username'] = username
             session['ownedSets'] = ownedSets
             session['wishlistSets'] = wishlistSets

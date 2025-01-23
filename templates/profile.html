@@ -3,9 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/profile.css') }}">
     <title>Document</title>
 </head>
 <body>
-    
+    <div class="header">
+        <div class="header-item">Welcome {{username}}!!</div>
+        <div class="header-item">Set Lookup</div>
+        <div class="header-item"><a href="{{url_for('settings_page')}}">Settings</a></div>
+    </div>
+
+    <div class="set-container">
+        <div class="ownedSets">
+            <h1> owned sets</h1>
+        </div>
+
+        <div class="wishlistSets">
+            <h1>wishlist sets</h1>
+        </div>
+    </div>
+
 </body>
 </html>
