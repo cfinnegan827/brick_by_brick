@@ -43,6 +43,7 @@ def get_set_by_params(user_hash, params):
                 print(f"Year: {set_info['year']}")
                 print(f"Pieces: {set_info.get('pieces', 'N/A')}")
                 print(f"Set Image: {set_info['image'], 'N/A'}\n")
+            print(data['sets'][1]['LEGOCom']['US']['retailPrice'])
             return data['sets']
         else:
             print(data)

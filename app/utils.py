@@ -103,3 +103,11 @@ def get_users_set_lists(username):
     ownedSets = user['ownedSets']
     wishlist = user['wishlistSets']
     return ownedSets, wishlist
+
+# takes a dictionary of sets and cuts it into pages of 12, 3 across 4 down
+def make_pages(all_sets):
+    set_pages = {}
+    page_length = 12
+    while len(all_sets > 0):
+        return
+    return
