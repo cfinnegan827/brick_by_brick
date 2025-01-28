@@ -5,16 +5,18 @@ import json
 from app import app
 
 
-app.secret_key = 'your_secret_key_here'
+app.secret_key = 'brick_by_brick_secret_key'
 app.permanent_session_lifetime = timedelta(hours=5)
 
-
+#initial app route that redirectsd a user to the login screen if they arent signed in 
+# or the home screen if you are logged in
 @app.route('/')
 def index():
     if 'username' in session:
         return redirect(url_for('home'))
     return render_template('login.html')
 
+# app route for the profile pagewhere a user can adjust their sets list and their settings
 @app.route('/profile-page')
 def profile_page():
     if 'username' in session:
@@ -22,6 +24,7 @@ def profile_page():
         return render_template('profile.html', username = username)
     return redirect(url_for('index'))
 
+# app route for the settings page for the user
 @app.route('/settings')
 def settings_page():
     if 'username' in session:
@@ -29,6 +32,7 @@ def settings_page():
         return render_template('settings.html', username = username)
     return redirect(url_for('index'))
 
+# app.route for the home page of the user where they can pick a direction to interact
 @app.route('/home')
 def home():
     if 'username' in session:
@@ -36,18 +40,28 @@ def home():
         return render_template('home.html', username = username)
     return redirect(url_for('index'))
 
+# simple app route to render the login page
 @app.route('/login')
 def login():
     return render_template('login.html')
 
+#simple app route to render the registration page
 @app.route('/register')
 def register():
     return render_template('register.html')
 
+#app route for the owned sets page that is accessed in prfile page
 @app.route('/owned-sets')
 def owned_sets():
     return render_template('/sets/ownedSets.html')
 
+# app route for the add sets page where users add sets to a specific list(owned or wishlist) if they want
+@app.route('/add-sets')
+def add_sets():
+    return render_template('/sets/addSets.html')
+
+# app route for a user to logout, where all cookies are popped out of the session and the user
+# is redirected to the login page
 @app.route('/logout')
 def logout():
     # Clear the session when logging out
@@ -56,6 +70,8 @@ def logout():
     session.pop('wishlistSets', None)
     return redirect(url_for('index'))  # Redirect to login page
 
+# authenticates a user by taking info from the login form submission and 
+# checks to see if the users entered password matches for the username they entered
 @app.route('/authenticate-user', methods=['POST'])
 def authenticate_user():
     username = request.form['username']
@@ -72,6 +88,8 @@ def authenticate_user():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
+# add a user to the db by calling the util function for adding user and takes the 
+# submission from the form
 @app.route('/add-user', methods=['POST'])
 def add_user():
     try:
@@ -85,17 +103,15 @@ def add_user():
         return jsonify({"error": str(e)}), 500
 
 #get all sets based on a set of params using get_set_by_params function
-@app.route('/get-sets', methods=['POST'])
+@app.route('/get-sets', methods=['GET'])
 def get_sets():
-    input_data = request.json
-    if not input_data:
-        return jsonify({"error": "Invalid input, expected JSON"}), 400
-    user_hash = authenticate()
-    if not user_hash:
-        return jsonify({"error": "invalid user hash data authentication failed"}), 401
-    try:
-        params = input_data.get('params', {})
-        sets = get_set_by_params(user_hash, params)
-        return jsonify({"success": True, "sets": sets})
-    except Exception as e:
-        return jsonify({"error": str(e)}), 500
+    theme = request.form['theme']
+    year = request.form['year']
+    query = request.form['query']
+    params = {'theme': theme, 'year': year, 'query': query}
+    sets = get_set_by_params(params)
+    return sets
+
+@app.route('/display-sets')
+def display_sets():
+    return

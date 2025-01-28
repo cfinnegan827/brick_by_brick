@@ -27,8 +27,9 @@ def authenticate():
     return None
 
 
-def get_set_by_params(user_hash, params):
+def get_set_by_params(params):
     url = f"{API_URL}/getSets"
+    user_hash = authenticate()
     params = {
         "apiKey": BRICKSET_API_KEY,
         "userHash": user_hash,

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="header">
+        <div class="header-item">Welcome {{username}}!!</div>
+        <div class="header-item">Home</div>
+        <div class="header-item"><a href="{{url_for('profile_page')}}">Profile</a></div>
+    </div>
+
+    <div class="query">
+        <form class="form-params" action="{{url_for('get_sets')}}" method="get">
+                <input type="text" id="theme" name="theme" placeholder="Enter a Theme" autocomplete="off">
+                <input type="text" id="year" name="year" placeholder="Enter Year" autocomplete="off">
+                <input type="text" placeholder="Search Key" autocomplete="off">
+                <input type="submit" value="Submit"><br>
+        </form>
+    </div>
+    <div class="results"></div>
+</body>
+</html>
