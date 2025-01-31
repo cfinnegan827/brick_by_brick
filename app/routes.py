@@ -105,11 +105,15 @@ def add_user():
 #get all sets based on a set of params using get_set_by_params function
 @app.route('/get-sets', methods=['GET'])
 def get_sets():
-    theme = request.form['theme']
-    year = request.form['year']
-    query = request.form['query']
-    params = {'theme': theme, 'year': year, 'query': query}
+    theme = request.args.get('theme', default=None, type=str)
+    year = request.args.get('year', default=None, type=str)
+    query = request.args.get('query', default=None, type=str)
+    # Only include non-empty parameters in the search
+    #add a fir loop to check if the param null add to dict if not cause
+    #for some reaso it wont accept the query, and change this so its added to add sets page
+    params = {k: v for k, v in {'theme': theme, 'year': year, 'query': query}.items() if v}
     sets = get_set_by_params(params)
+    session['test_sets'] = sets
     return sets
 
 @app.route('/display-sets')
