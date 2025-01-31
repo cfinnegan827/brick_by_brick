@@ -1,4 +1,4 @@
-.venv
+.DS_Store
 app/__pycache__
 app/config/__pycache__
 app/config/service_key.json
