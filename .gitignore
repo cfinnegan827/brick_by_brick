@@ -1,6 +1,6 @@
 .venv
 app/__pycache__
 app/config/__pycache__
-
-app/config/brick_by_brick_service_key.json
 app/config/service_key.json
+app/config/*
+app/config/*.py
