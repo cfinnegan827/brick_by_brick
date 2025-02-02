@@ -108,10 +108,17 @@ def get_sets():
     theme = request.args.get('theme', default=None, type=str)
     year = request.args.get('year', default=None, type=str)
     query = request.args.get('query', default=None, type=str)
+    param = ['theme', 'year', 'query']
+    args = [theme, year, query]
+    params = {}
     # Only include non-empty parameters in the search
     #add a fir loop to check if the param null add to dict if not cause
     #for some reaso it wont accept the query, and change this so its added to add sets page
-    params = {k: v for k, v in {'theme': theme, 'year': year, 'query': query}.items() if v}
+    for i in range(0,3):
+        if args[i] == None or param == "":
+            continue
+        params[param[i]] = args[i]
+    print(params)
     sets = get_set_by_params(params)
     session['test_sets'] = sets
     return sets

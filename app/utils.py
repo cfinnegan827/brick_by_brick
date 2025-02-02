@@ -40,13 +40,13 @@ def get_set_by_params(params):
     if response.status_code == 200:
         data = response.json()
         if "sets" in data:
-            for set_info in data["sets"]:
-                print(f"Name: {set_info['name']}")
-                print(f"Theme: {set_info['theme']}")
-                print(f"Set ID: {set_info['setID']}")
-                print(f"Year: {set_info['year']}")
-                print(f"Pieces: {set_info.get('pieces', 'N/A')}")
-                print(f"Set Image: {set_info['image'], 'N/A'}\n")
+            # for set_info in data["sets"]:
+            #     print(f"Name: {set_info['name']}")
+            #     print(f"Theme: {set_info['theme']}")
+            #     print(f"Set ID: {set_info['setID']}")
+            #     print(f"Year: {set_info['year']}")
+            #     print(f"Pieces: {set_info.get('pieces', 'N/A')}")
+            #     print(f"Set Image: {set_info['image'], 'N/A'}\n")
             return data["sets"]
         else:
             print("No sets found.")
@@ -103,6 +103,11 @@ def get_users_set_lists(username):
     ownedSets = user['ownedSets']
     wishlist = user['wishlistSets']
     return ownedSets, wishlist
+
+# trims the set list down to only necessary components
+def trim_sets():
+    trimmed_sets = []
+    return trimmed_sets
 
 # takes a dictionary of sets and cuts it into pages of 12, 3 across 4 down
 def make_pages(all_sets):

@@ -13,12 +13,13 @@
     </div>
 
     <div class="query">
-        <form class="form-params" action="{{url_for('get_sets')}}" method="get">
-                <input type="text" id="theme" name="theme" placeholder="Enter a Theme" autocomplete="off">
-                <input type="text" id="year" name="year" placeholder="Enter Year" autocomplete="off">
-                <input type="text" placeholder="Search Key" autocomplete="off">
-                <input type="submit" value="Search"><br>
+        <form class="form-params" action="{{ url_for('get_sets') }}" method="get">
+            <input type="text" id="theme" name="theme" placeholder="Enter a Theme" autocomplete="off">
+            <input type="text" id="query" name="query" placeholder="Enter Key" autocomplete="off">
+            <input type="text" id="year" name="year" placeholder="Search year" autocomplete="off">
+            <input type="submit" value="Search">
         </form>
+        
     </div>
     <div class="results">{{sets}}</div>
 </body>
