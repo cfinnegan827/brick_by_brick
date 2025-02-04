@@ -47,7 +47,8 @@ def get_set_by_params(params):
             #     print(f"Year: {set_info['year']}")
             #     print(f"Pieces: {set_info.get('pieces', 'N/A')}")
             #     print(f"Set Image: {set_info['image'], 'N/A'}\n")
-            return data["sets"]
+            sets = trim_sets(data['sets'])
+            return sets
         else:
             print("No sets found.")
     else:
@@ -105,8 +106,22 @@ def get_users_set_lists(username):
     return ownedSets, wishlist
 
 # trims the set list down to only necessary components
-def trim_sets():
+def trim_sets(all_sets):
     trimmed_sets = []
+    for set in all_sets:
+        #trim down the set to name, id, price, image, etc.
+        new_set = {
+            'setID': set.get('setID'),
+            'number': set.get('number'),
+            'name': set.get('name'),
+            'year': set.get('year'),
+            'theme': set.get('theme'),
+            'subtheme': set.get('subtheme'),
+            'pieces': set.get('pieces'),
+            'price' : set.get('LEGOCom').get('US').get('retailPrice'),
+            'image': set.get('image').get('imageURL') if set.get('image').get('imageURL') else ''
+        }
+        trimmed_sets.append(new_set)
     return trimmed_sets
 
 # takes a dictionary of sets and cuts it into pages of 12, 3 across 4 down

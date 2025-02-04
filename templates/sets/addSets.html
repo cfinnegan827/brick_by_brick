@@ -27,8 +27,8 @@
             <ul>
                 {% for set in sets %}
                     <li>
-                        <strong>{{ set.name }}</strong> - {{ set.theme }} ({{ set.year }})
-                        <br> Pieces: {{ set.pieces }} | Minifigs: {{ set.minifigs }}
+                        <strong>{{ set.name }} ({{ set.number}})</strong> - {{ set.theme }} ({{ set.year }})
+                        <br> Pieces: {{ set.pieces }} | Price: {{ set.price }}
                     </li>
                 {% endfor %}
             </ul>
