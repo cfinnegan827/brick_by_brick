@@ -9,13 +9,13 @@
 <body>
     <div class="header">
         <div class="header-item">Welcome {{username}}!!</div>
-        <div class="header-item"><a href="{{url_for('add_sets')}}">Set Lookup</a></div>
-        <div class="header-item"><a href="{{url_for('settings_page')}}">Settings</a></div>
+        <div class="header-item"><a href="/add-sets">Set Lookup</a></div>
+        <div class="header-item"><a href="/settings">Settings</a></div>
     </div>
 
     <div class="set-container">
         <div class="ownedSets">
-            <h1><a href="{{url_for('owned_sets')}}">Owned Sets</a></h1>
+            <h1><a href="/owned-sets">Owned Sets</a></h1>
         </div>
 
         <div class="wishlistSets">

@@ -8,7 +8,7 @@
 </head>
 <body>
     <h1>Login</h1>
-    <form id="login-form" action="{{ url_for('authenticate_user') }}"method="post">
+    <form id="login-form" action="/authenticate-user"method="post">
         <div class="inputBox">
             <input type="text" id="username" name="username" autocomplete="off" required><br>
             <span for="username">Username</span><br>
@@ -19,7 +19,7 @@
         </div>
         <input type="submit" value="Submit"><br>
 
-        <a href="{{url_for('register')}}">Don't have and account? Sign Up</a>
+        <a href="/register">Don't have and account? Sign Up</a>
     </form>
     <div id="message"></div>
 </body>

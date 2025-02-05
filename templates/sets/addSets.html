@@ -9,11 +9,11 @@
     <div class="header">
         <div class="header-item">Welcome {{username}}!!</div>
         <div class="header-item">Home</div>
-        <div class="header-item"><a href="{{url_for('profile_page')}}">Profile</a></div>
+        <div class="header-item"><a href="/profile-page">Profile</a></div>
     </div>
 
     <div class="query">
-        <form class="form-params" action="{{ url_for('get_sets') }}" method="get">
+        <form class="form-params" action="/get-sets" method="get">
             <input type="text" id="theme" name="theme" placeholder="Enter a Theme" autocomplete="off">
             <input type="text" id="query" name="query" placeholder="Enter Key" autocomplete="off">
             <input type="text" id="year" name="year" placeholder="Search year" autocomplete="off">
@@ -29,7 +29,7 @@
                     <li>
                         <strong>{{ set.name }} ({{ set.number}})</strong> - {{ set.theme }} ({{ set.year }})
                         <br> Pieces: {{ set.pieces }} | Price: {{ set.price }}
-                        <form id="add_Set" action="{{url_for('add_to_owned')}}" method="post">
+                        <form id="add_Set" action="/add-owned" method="post">
                             <input type="hidden" name="set_to_add" value="{{ set }}">
                             <input type="submit" value="add set">
                         </form>

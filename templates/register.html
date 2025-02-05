@@ -9,7 +9,7 @@
 </head>
 <body>
     <h1>Sign Up</h1>
-    <form id="signup-form" action="{{ url_for('add_user') }}" method="post">
+    <form id="signup-form" action="/add-user" method="post">
         <div class="inputBox">
             <span for="username">Username</span><br>
             <input type="text" id="username" name="username" autocomplete="off" required><br>
@@ -31,7 +31,7 @@
         </div>
         <input type="submit" value="Sign Up"><br>
 
-        <a href="{{url_for('login')}}">Already have an account? Login</a>
+        <a href="/login">Already have an account? Login</a>
     </form>
     <div id="message"></div>
 </body>
