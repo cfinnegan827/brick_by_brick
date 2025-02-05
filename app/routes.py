@@ -118,6 +118,18 @@ def get_sets():
     sets = get_set_by_params(params)
     return render_template('/sets/addSets.html', sets=sets)
 
-@app.route('/display-sets')
-def display_sets():
+
+#todo 
+# add code for adding set to wishlist of set for the user and add to the owned sets 
+# and work around the html for distinguishing what set is what, maybe but the lsit in forms with two buttons 
+# but should probably run checks to make sure the sets are not in both list and ,aube try and handle metrics too
+@app.route('/add-wishlist')
+def add_to_wishlist():
     return
+
+@app.route('/add-owned', methods=['POST'])
+def add_to_owned():
+    set_to_add = request.form['set_to_add']
+    username = session['username']
+    add_set_to_ownedlist(username, set_to_add)
+    return redirect(url_for('add_sets')) # Tell frontend to reload

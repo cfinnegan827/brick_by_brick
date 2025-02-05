@@ -29,6 +29,10 @@
                     <li>
                         <strong>{{ set.name }} ({{ set.number}})</strong> - {{ set.theme }} ({{ set.year }})
                         <br> Pieces: {{ set.pieces }} | Price: {{ set.price }}
+                        <form id="add_Set" action="{{url_for('add_to_owned')}}" method="post">
+                            <input type="hidden" name="set_to_add" value="{{ set }}">
+                            <input type="submit" value="add set">
+                        </form>
                     </li>
                 {% endfor %}
             </ul>

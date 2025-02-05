@@ -3,6 +3,7 @@ from app.config.brickset_config import BRICKSET_API_KEY, BRICKSET_USERNAME, BRIC
 from app.config.firebaseConfig import db
 import json
 import bcrypt
+from firebase_admin import firestore
 
 API_URL = "https://brickset.com/api/v3.asmx"
 
@@ -124,10 +125,15 @@ def trim_sets(all_sets):
         trimmed_sets.append(new_set)
     return trimmed_sets
 
-# takes a dictionary of sets and cuts it into pages of 12, 3 across 4 down
-def make_pages(all_sets):
-    set_pages = {}
-    page_length = 12
-    while len(all_sets > 0):
-        return
-    return
+#add sets to wishlist or the owned sets
+def add_set_to_wishlist(username, set_to_add):
+    db.collection("users").document(username).update({
+        'wishlistSets': firestore.ArrayUnion([set_to_add])
+        })
+    return 'added set to wishlist'
+
+def add_set_to_ownedlist(username, set_to_add):
+    db.collection("users").document(username).update({
+    'ownedSets': firestore.ArrayUnion([set_to_add])
+    })
+    return 'added set to wishlist'
