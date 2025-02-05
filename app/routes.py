@@ -6,7 +6,7 @@ from app import app
 
 
 app.secret_key = 'brick_by_brick_secret_key'
-app.permanent_session_lifetime = timedelta(hours=5)
+app.permanent_session_lifetime = timedelta(hours=1)
 
 #initial app route that redirectsd a user to the login screen if they arent signed in 
 # or the home screen if you are logged in
@@ -119,10 +119,7 @@ def get_sets():
     return render_template('/sets/addSets.html', sets=sets)
 
 
-#todo 
-# add code for adding set to wishlist of set for the user and add to the owned sets 
-# and work around the html for distinguishing what set is what, maybe but the lsit in forms with two buttons 
-# but should probably run checks to make sure the sets are not in both list and ,aube try and handle metrics too
+
 @app.route('/add-wishlist')
 def add_to_wishlist():
     return
@@ -131,5 +128,8 @@ def add_to_wishlist():
 def add_to_owned():
     set_to_add = request.form['set_to_add']
     username = session['username']
-    add_set_to_ownedlist(username, set_to_add)
-    return redirect(url_for('add_sets')) # Tell frontend to reload
+    if check_dup_owned(username, set_to_add):
+        add_set_to_ownedlist(username, set_to_add)
+        return redirect(url_for('add_sets')) # Tell frontend to reload
+    else:
+        return jsonify({'error': False})

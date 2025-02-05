@@ -19,7 +19,6 @@ def authenticate():
     if response.status_code == 200:
         data = response.json()
         if data["status"] == "success":
-            print("Successfully authenticated!")
             return data["hash"]
         else:
             print("Authentication failed:", data["message"])
@@ -36,7 +35,6 @@ def get_set_by_params(params):
         "userHash": user_hash,
         "params": json.dumps(params)
     }
-    print("made it here")
     response = requests.get(url, params=params)
     if response.status_code == 200:
         data = response.json()
@@ -137,3 +135,17 @@ def add_set_to_ownedlist(username, set_to_add):
     'ownedSets': firestore.ArrayUnion([set_to_add])
     })
     return 'added set to wishlist'
+
+
+
+#checks to see if a user has a set in either of their set list
+def check_dup_owned(username, set_to_check):
+    sets = db.collection('users').document(username).get().to_dict().get('ownedSets')
+    for set in sets:
+        if set == set_to_check:
+            return False
+    print(sets)
+    return True
+
+def check_dup_wishlist(username, set_to_checks):
+    return
