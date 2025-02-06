@@ -53,7 +53,11 @@ def register():
 #app route for the owned sets page that is accessed in prfile page
 @app.route('/owned-sets')
 def owned_sets():
-    return render_template('/sets/ownedSets.html')
+    if 'username' in session:
+        username = session['username']
+        owned_sets = get_owned_sets_db(username)
+        return render_template('/sets/ownedSets.html', sets = owned_sets)
+    return redirect(url_for('index'))
 
 # app route for the add sets page where users add sets to a specific list(owned or wishlist) if they want
 @app.route('/add-sets')
