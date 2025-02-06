@@ -147,5 +147,19 @@ def check_dup_owned(username, set_to_check):
     print(sets)
     return True
 
-def check_dup_wishlist(username, set_to_checks):
-    return
+def check_dup_wishlist(username, set_to_check):
+    sets = db.collection('users').document(username).get().to_dict().get('wishlistSets')
+    for set in sets:
+        if set == set_to_check:
+            return False
+    print(sets)
+    return True
+
+def get_wishlist_sets_db(username):
+    sets = db.collection('users').document(username).get().to_dict().get('wishlistSets')
+    return sets
+
+def get_owned_sets_db(username):
+    sets = db.collection('users').document(username).get().to_dict().get('ownedSets')
+    return sets
+

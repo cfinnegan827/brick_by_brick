@@ -31,13 +31,17 @@
                         <br> Pieces: {{ set.pieces }} | Price: {{ set.price }}
                         <form id="add_Set" action="/add-owned" method="post">
                             <input type="hidden" name="set_to_add" value="{{ set }}">
-                            <input type="submit" value="add set">
+                            <input type="submit" value="owned">
+                        </form>
+                        <form id="add_Set" action="/add-wishlist" method="post">
+                            <input type="hidden" name="set_to_add" value="{{ set }}">
+                            <input type="submit" value="wishlist">
                         </form>
                     </li>
                 {% endfor %}
             </ul>
         {% else %}
-            <p>No results found.</p>
+            <p>{{error}}</p>
         {% endif %}
     </div>
 </body>

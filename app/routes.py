@@ -116,20 +116,31 @@ def get_sets():
         if args[i]:
             params[param[i]] = args[i]
     sets = get_set_by_params(params)
-    return render_template('/sets/addSets.html', sets=sets)
+    if sets:
+        return render_template('/sets/addSets.html', sets=sets)
+    sets_error = "no sets found"
+    return render_template('/sets/addSets.html', error=sets_error)
 
 
 
 @app.route('/add-wishlist')
 def add_to_wishlist():
-    return
+    username = session['username']
+    set_to_add = request.form['set_to_add']
+    if check_dup_wishlist(username, set_to_add):
+        add_set_to_wishlist(username, set_to_add)
+        return redirect(url_for('add_sets')) # Tell frontend to reload
+    else:
+        sets_error = f"{set_to_add.get('name')} is a already in your wishlist set list"
+        return render_template('/sets/addSets.html', sets=sets_error)
 
 @app.route('/add-owned', methods=['POST'])
 def add_to_owned():
-    set_to_add = request.form['set_to_add']
+    set_to_add = request.form['set_to_add'] 
     username = session['username']
     if check_dup_owned(username, set_to_add):
         add_set_to_ownedlist(username, set_to_add)
         return redirect(url_for('add_sets')) # Tell frontend to reload
     else:
-        return jsonify({'error': False})
+        sets_error = f"{set_to_add} is a already in your owned set list"
+        return render_template('/sets/addSets.html', error=sets_error)
