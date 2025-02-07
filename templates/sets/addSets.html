@@ -27,8 +27,14 @@
             <ul>
                 {% for set in sets %}
                     <li>
-                        <strong>{{ set.name }} ({{ set.number}})</strong> - {{ set.theme }} ({{ set.year }})
-                        <br> Pieces: {{ set.pieces }} | Price: {{ set.price }}
+                        <div class="set">
+                            <h2><strong>{{ set.name }} ({{ set.number}})</strong></h2>
+                            <p>
+                                {{ set.theme }} ({{ set.year }})
+                                <br> Pieces: {{ set.pieces }} | Price: {{ set.price }}
+                            </p>
+                            <img src="{{set.image}}" alt="set image">
+                        </div>
                         <form id="add_Set" action="/add-owned" method="post">
                             <input type="hidden" name="set_to_add" value="{{ set }}">
                             <input type="submit" value="owned">
