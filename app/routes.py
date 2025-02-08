@@ -59,6 +59,15 @@ def owned_sets():
         return render_template('/sets/ownedSets.html', sets = owned_sets)
     return redirect(url_for('index'))
 
+#app route for the owned sets page that is accessed in prfile page
+@app.route('/wishlist-sets')
+def wishlist_sets():
+    if 'username' in session:
+        username = session['username']
+        owned_sets = get_wishlist_sets_db(username)
+        return render_template('/sets/wishlistSets.html', sets = owned_sets)
+    return redirect(url_for('index'))
+
 # app route for the add sets page where users add sets to a specific list(owned or wishlist) if they want
 @app.route('/add-sets')
 def add_sets():
