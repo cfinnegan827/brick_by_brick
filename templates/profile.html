@@ -8,18 +8,20 @@
 </head>
 <body>
     <div class="header">
-        <div class="header-item">Welcome {{username}}!!</div>
-        <div class="header-item"><a href="/add-sets">Set Lookup</a></div>
-        <div class="header-item"><a href="/settings">Settings</a></div>
+        <div class="header-item-1">Welcome {{username}}!</div>
+        <div class="header-item" onclick="window.location.href='/add-sets';"><a href="/add-sets">Set Lookup</a></div>
+        <div class="header-item" onclick="window.location.href='/settings';"><a href="/settings">Settings</a></div>
     </div>
 
     <div class="set-container">
+        <h1>View your Sets</h1>
         <div class="ownedSets">
             <h1><a href="/owned-sets">Owned Sets</a></h1>
+            <img src="{{recent_owned_image}}" alt="most recent owned image">
         </div>
 
         <div class="wishlistSets">
-            <h1><a href="/wishlist-sets">wishlist sets</a></h1>
+            <h1><a href="/wishlist-sets">Wishlist Sets</a></h1>
         </div>
     </div>
 

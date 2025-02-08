@@ -1,46 +1,56 @@
 body{
+    background: #121212;
     display: grid;
-    grid-template-columns: repeat(7, 1fr);
+    grid-template-columns: repeat(5, 1fr);
     grid-template-rows: repeat(5, 1fr);
     grid-column-gap: 0px;
     grid-row-gap: 0px; 
 }
-
 .header {
-    display: flex; /* Makes the divs align horizontally */
-    grid-area: 1 / 1 / 2 / 8;
+    display: inline-flex; 
+    grid-area: 1 / 1 / 2 / 6;
     height: 50%;
-    justify-content: space-between; /* Distributes space between divs */
-    align-items: center; /* Aligns items vertically in the center */
-    width: 100%; /* Ensures the header spans the full width of the screen */
-    background-color: #f8f9fa; /* Light background color */
-    padding: 10px 20px; /* Adds space inside the header */
-    border-bottom: 2px solid #ccc; /* Optional: Add a border at the bottom */
-    box-sizing: border-box; /* Includes padding in the width calculation */
+    justify-content: space-between; 
+    align-items: center; 
+    width: 100%; 
+    background: #212121; 
+    padding: 10px 20px; 
+    border: 2px solid #fffdd0;
+    border-radius: 5px;
+    box-sizing: border-box; 
 }
 
+/* Individual header items */
 .header-item {
-    font-size: 18px; /* Text size */
-    color: #333; /* Text color */
-    text-align: center; /* Centers the text within the div */
-    padding: 10px; /* Space inside the divs */
-    cursor: pointer; /* Adds pointer cursor to indicate clickability */
+    font-size: 18px; 
+    color: white; 
+    text-align: center; 
+    padding: 10px;
+    cursor: pointer; 
+}
+.header-item-1 {
+    font-size: 18px; 
+    color: white; 
+    text-align: center; 
+    padding: 10px;
 }
 
 .header-item:hover {
-    color: #007bff; /* Change text color on hover */
-    background-color: #e9ecef; /* Optional: Add a hover background color */
-    border-radius: 5px; /* Optional: Rounded corners on hover */
+    color: black; 
+    background-color: #fffdd0; 
+    border-radius: 5px;
 }
 
 .header-item a {
-    text-decoration: none; /* Remove underline */
-    color: inherit;        /* Inherit color from parent */
+    text-decoration: none; 
+    color: inherit;       
 }
 
 .set-container{
+    border: 2px solid #fffdd0;
+    border-radius: 20px;
+    background: #212121;
     display: grid;
-    background-color: brown;
     grid-area: 2 / 1 / 5 / 9;
     grid-template-rows: repeat(5, 1fr);
     grid-template-rows: repeat(5, 1fr);
@@ -48,14 +58,22 @@ body{
     grid-row-gap: 0px; 
     padding-left: 5vw;
     padding-right: 5vw;
+    color: white;
 }
 .ownedSets{
     height: 40vh;
+    width: 40vw;
     background-color: red;
     grid-area: 2 / 1 / 5 / 3;
     text-align: center;
+    overflow: hidden;
 }
 
+.ownedSets img{
+    max-width: 90%;
+    max-height: 80%;
+    object-fit: contain;
+}
 .ownedSets a {
     text-decoration: none; /* Remove underline */
     color: inherit;        /* Inherit color from parent */
@@ -64,7 +82,13 @@ body{
 
 .wishlistSets{
     height: 40vh;
+    width: 40vw;
     background-color: blueviolet;
     grid-area: 2 / 4 / 5 / 6;
     text-align: center;
+}
+.wishlistSets a {
+    text-decoration: none; /* Remove underline */
+    color: inherit;        /* Inherit color from parent */
+    cursor: pointer;
 }

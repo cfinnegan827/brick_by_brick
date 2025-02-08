@@ -4,6 +4,7 @@ from app.config.firebaseConfig import db
 import json
 import bcrypt
 from firebase_admin import firestore
+import ast
 
 API_URL = "https://brickset.com/api/v3.asmx"
 
@@ -163,3 +164,13 @@ def get_owned_sets_db(username):
     sets = db.collection('users').document(username).get().to_dict().get('ownedSets')
     return sets
 
+#gets most recent set added and returns the image
+def get_recent_owned_image(username):
+    owned_Sets = get_owned_sets_db(username)
+    data_dicts = [ast.literal_eval(item) for item in owned_Sets]
+    recent_Set_image = data_dicts[len(owned_Sets)-1].get('image')
+    print(recent_Set_image)
+    return recent_Set_image
+
+def get_recent_wishlist_image():
+    return

@@ -21,7 +21,8 @@ def index():
 def profile_page():
     if 'username' in session:
         username = session['username']
-        return render_template('profile.html', username = username)
+        owned_set_image = get_recent_owned_image(username)
+        return render_template('profile.html', username = username, recent_owned_image = owned_set_image)
     return redirect(url_for('index'))
 
 # app route for the settings page for the user
@@ -157,3 +158,4 @@ def add_to_owned():
     else:
         sets_error = f"{set_to_add} is a already in your owned set list"
         return render_template('/sets/addSets.html', error=sets_error)
+    
