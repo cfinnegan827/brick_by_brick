@@ -22,7 +22,8 @@ def profile_page():
     if 'username' in session:
         username = session['username']
         owned_set_image = get_recent_owned_image(username)
-        return render_template('profile.html', username = username, recent_owned_image = owned_set_image)
+        wishlist_set_image = get_recent_wishlist_image(username)
+        return render_template('profile.html', username = username, recent_owned_image = owned_set_image, recent_wishlist_image = wishlist_set_image)
     return redirect(url_for('index'))
 
 # app route for the settings page for the user
@@ -137,7 +138,7 @@ def get_sets():
 
 
 
-@app.route('/add-wishlist')
+@app.route('/add-wishlist', methods=['POST'])
 def add_to_wishlist():
     username = session['username']
     set_to_add = request.form['set_to_add']
@@ -145,8 +146,8 @@ def add_to_wishlist():
         add_set_to_wishlist(username, set_to_add)
         return redirect(url_for('add_sets')) # Tell frontend to reload
     else:
-        sets_error = f"{set_to_add.get('name')} is a already in your wishlist set list"
-        return render_template('/sets/addSets.html', sets=sets_error)
+        sets_error = f"{set_to_add} is a already in your wishlist set list"
+        return render_template('/sets/addSets.html', error=sets_error)
 
 @app.route('/add-owned', methods=['POST'])
 def add_to_owned():
