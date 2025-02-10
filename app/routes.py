@@ -81,8 +81,6 @@ def add_sets():
 def logout():
     # Clear the session when logging out
     session.pop('username', None)
-    session.pop('ownedSets', None)
-    session.pop('wishlistSets', None)
     return redirect(url_for('index'))  # Redirect to login page
 
 # authenticates a user by taking info from the login form submission and 
@@ -93,11 +91,8 @@ def authenticate_user():
     password = request.form['password']
     try:
         if authenticate_user_in_db(username, password):
-            ownedSets, wishlistSets = get_users_set_lists(username)
             session.permanent = True
             session['username'] = username
-            session['ownedSets'] = ownedSets
-            session['wishlistSets'] = wishlistSets
             return redirect(url_for('home')) #fix this to add cookies using session nect time.
         return redirect(url_for('index'))
     except Exception as e:
