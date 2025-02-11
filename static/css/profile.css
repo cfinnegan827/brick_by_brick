@@ -53,8 +53,7 @@ body{
     grid-area: 2 / 1 / 5 / 9;
     grid-column-gap: 0px;
     grid-row-gap: 0px; 
-    padding-left: 5vw;
-    padding-right: 5vw;
+    padding: 5vw;
     color: white;
     display: block;
     align-items: center;

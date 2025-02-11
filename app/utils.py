@@ -81,14 +81,12 @@ def authenticate_user_in_db(username, password):
     takes a users username and password and authenticates them, if authentication
     passes user can log in succesfully
     """
-    username = username
     password = password.encode('utf-8')
     try:
         userRef = db.collection('users').document(username)
         user = userRef.get()
-
         if not user.exists:
-            raise ValueError(f"User {username} not found")
+            return False
         
         stored_password = user.to_dict()['password'].encode('utf-8')
 
@@ -141,38 +139,48 @@ def add_set_to_ownedlist(username, set_to_add):
 
 #checks to see if a user has a set in either of their set list
 def check_dup_owned(username, set_to_check):
-    sets = db.collection('users').document(username).get().to_dict().get('ownedSets')
-    for set in sets:
-        if set == set_to_check:
-            return False
-    print(sets)
+    temp_sets = db.collection('users').document(username).get().to_dict()
+    if temp_sets:
+        sets = temp_sets.get('ownedSets')
+        for set in sets:
+            if set == set_to_check:
+                return False
     return True
 
 def check_dup_wishlist(username, set_to_check):
-    sets = db.collection('users').document(username).get().to_dict().get('wishlistSets')
-    for set in sets:
-        if set == set_to_check:
-            return False
-    print(sets)
+    temp_sets = db.collection('users').document(username).get().to_dict()
+    if temp_sets:
+        sets = temp_sets.get('wishlistSets')
+        for set in sets:
+            if set == set_to_check:
+                return False
     return True
 
 def get_wishlist_sets_db(username):
-    sets = db.collection('users').document(username).get().to_dict().get('wishlistSets')
-    return sets
+    sets = db.collection('users').document(username).get().to_dict()
+    if not sets:
+        return
+    return sets.get('wishlistSets')
 
 def get_owned_sets_db(username):
-    sets = db.collection('users').document(username).get().to_dict().get('ownedSets')
-    return sets
+    sets = db.collection('users').document(username).get().to_dict()
+    if not sets:
+        return
+    return sets.get('ownedSets')
 
 #gets most recent set added and returns the image
 def get_recent_owned_image(username):
     owned_Sets = get_owned_sets_db(username)
-    data_dicts = [ast.literal_eval(item) for item in owned_Sets]
-    recent_Set_image = data_dicts[len(owned_Sets)-1].get('image')
-    return recent_Set_image
+    if owned_Sets:
+        data_dicts = [ast.literal_eval(item) for item in owned_Sets]
+        recent_Set_image = data_dicts[len(owned_Sets)-1].get('image')
+        return recent_Set_image
+    return
 
 def get_recent_wishlist_image(username):
     wishlist_sets = get_wishlist_sets_db(username)
-    data_dicts = [ast.literal_eval(item) for item in wishlist_sets]
-    recent_Set_image = data_dicts[len(wishlist_sets)-1].get('image')
-    return recent_Set_image
+    if wishlist_sets:
+        data_dicts = [ast.literal_eval(item) for item in wishlist_sets]
+        recent_Set_image = data_dicts[len(wishlist_sets)-1].get('image')
+        return recent_Set_image
+    return
